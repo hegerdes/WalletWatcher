@@ -16,7 +16,7 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        File f = new File("bk.csv");
+        File f = new File("um.csv");
 
         ImportedTransaction ts = null;
         ArrayList<Transaction>[] sorted;
