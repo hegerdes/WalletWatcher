@@ -17,27 +17,20 @@ public class YearMonth implements Serializable {
         months[date.getMonthValue()-1] = true;
     }
 
-    public void addMonth(LocalDate date){
-        months[date.getMonthValue()-1] = true;
-    }
 
-    public void addMonth(Month month){
+    boolean addMonth(Month month){
         months[month.getValue()-1] = true;
+        return true;
     }
 
-    public void removeMonth(LocalDate date){
-        months[date.getMonthValue()-1] = false;
-    }
 
-    public void removeMonth(Month month){
+    boolean removeMonth(Month month){
         months[month.getValue()-1] = false;
+        return true;
     }
 
-    public boolean containsMonth(LocalDate date){
-        return months[date.getMonthValue()-1];
-    }
 
-    public boolean containsMonth(Month month){
+    boolean containsMonth(Month month){
         return months[month.getValue()-1];
     }
 

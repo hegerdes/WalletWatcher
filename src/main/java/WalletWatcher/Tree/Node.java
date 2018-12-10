@@ -1,4 +1,3 @@
-package WalletWatcher.Tree;
 
 
 public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {

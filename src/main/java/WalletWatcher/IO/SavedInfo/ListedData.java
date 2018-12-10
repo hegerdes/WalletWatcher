@@ -1,17 +1,23 @@
 package WalletWatcher.IO.SavedInfo;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ListedData implements Serializable {
 
+    private boolean changed;
     private final static String DATA = "DATA";
     private ArrayList<YearMonth> saved;
+    private HashMap<Integer,YearMonth> years;
     private File dataInfo;
 
     public ListedData() throws IOException {
         saved = new ArrayList<>();
+        years = new HashMap<>();
 
+        changed = false;
         dataInfo = new File(".\\" + DATA + "\\" + "savedInfo.dat");
         if(!dataInfo.exists()){
             dataInfo.createNewFile();
@@ -19,6 +25,21 @@ public class ListedData implements Serializable {
             read();
         }
 
+    }
+
+    public boolean addDate(LocalDate date){
+        if(years.containsKey(date.getYear())){
+            return years.get(date.getYear()).addMonth(date.getMonth());
+        }else {
+            years.put(date.getYear(),new YearMonth(date));
+            return true;
+        }
+    }
+
+    public boolean removeDate(LocalDate date){
+        if(years.containsKey(date.getYear())){
+            return years.get(date.getYear()).removeMonth(date.getMonth());
+        }else return false;
     }
 
     private void read() {
@@ -44,9 +65,5 @@ public class ListedData implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public boolean add(YearMonth yearMonth){
-        return saved.add(yearMonth);
     }
 }
